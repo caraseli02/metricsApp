@@ -4,20 +4,24 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import Calendar from 'primevue/calendar';
+import { useMetricsStore } from '../stores/metricsStore';
 
+const metricsStore = useMetricsStore()
+metricsStore.fetchMetrics()
         const editingRows = ref([]);
-        const metrics = ref(null);
 
         const onRowEditSave = (event) => {
             let { newData, index } = event;
 
             metrics.value[index] = newData;
         };
+
+        const toLocaleDateString = (date: string) => new Date(date).toLocaleDateString()
 </script>
 
 <template>
           <div class="card">
-            <DataTable :value="metrics" editMode="row" dataKey="id" v-model:editingRows="editingRows" @row-edit-save="onRowEditSave" responsiveLayout="scroll">
+            <DataTable :value="metricsStore.items" editMode="row" dataKey="id" v-model:editingRows="editingRows" @row-edit-save="onRowEditSave" responsiveLayout="scroll">
               <Column field="id" header="ID" style="width:20%">
                     <template #editor="{ data, field }">
                         <InputText v-model="data[field]" />
@@ -33,9 +37,14 @@ import Calendar from 'primevue/calendar';
                         <InputText v-model="data[field]" />
                     </template>
                 </Column>
-                <Column field="amounts" header="Amounts" style="width:20%">
+                <Column field="date" header="date" style="width:20%">
                     <template #editor="{ data, field }">
                       <Calendar inputId="basic" v-model="data[field]" autocomplete="off" />
+                    </template>
+                    <template #body="{ data, field }">
+                      <span>
+                        {{ toLocaleDateString(data[field]) }}
+                      </span>
                     </template>
                 </Column>
                 <Column :rowEditor="true" style="width:10%; min-width:8rem" bodyStyle="text-align:center"></Column>

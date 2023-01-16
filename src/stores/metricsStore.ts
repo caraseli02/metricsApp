@@ -1,36 +1,36 @@
 import { defineStore } from 'pinia';
 import { Metric } from '~/types/metric';
-import BackendService from '../services/backend';
+import BackendService from '../../services/backend';
 
-const backendService = new BackendService(CHALLENGE_API_KEY);
+const backendService = new BackendService(import.meta.env.CHALLENGE_API_KEY as string);
 
-export const useStore = defineStore({
+export const useMetricsStore = defineStore({
   id: 'metrics',
   state: () => {
     return {
-      metrics: [] as Metric[],
+      items: [] as Metric[],
     }
   },
   actions: {
     async fetchMetrics() {
-      this.metrics = await backendService.getMetrics();
+      this.items = await backendService.getMetrics();
     },
     async addMetric(metric: Metric) {
       await backendService.addMetric(metric);
-      this.metrics.push(metric);
+      this.items.push(metric);
     },
     async updateMetric( metric: Metric) {
       await backendService.updateMetric(metric);
-      const index = this.metrics.findIndex(m => m.id === metric.id);
+      const index = this.items.findIndex(m => m.id === metric.id);
       if (index >= 0) {
-        this.metrics[index] = metric;
+        this.items[index] = metric;
       }
     },
     async deleteMetric( id: string) {
       await backendService.deleteMetric(id);
-      const index = this.metrics.findIndex(m => m.id === id);
+      const index = this.items.findIndex(m => m.id === id);
       if (index >= 0) {
-        this.metrics.splice(index, 1);
+        this.items.splice(index, 1);
       }
     },
   },

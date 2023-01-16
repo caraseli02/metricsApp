@@ -21,7 +21,7 @@ const metrics : Metric[] = [
     new Metric("j66", "Zeta", [15,2,54,3,1,3,6,32], new Date(2021,2,3)),
 ];
 
-const CHALLENGE_API_KEY = "challengeApiKey";
+const CHALLENGE_API_KEY = import.meta.env.CHALLENGE_API_KEY
 
 export default class BackendService {
 	apiKey : string;
