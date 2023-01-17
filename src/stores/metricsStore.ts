@@ -9,6 +9,10 @@ export const useMetricsStore = defineStore({
   state: () => {
     return {
       items: [] as Metric[],
+      newItem: {} as Metric,
+      showMetricDialog: false,
+      submitted: false,
+      deleteProductDialog: false
     }
   },
   actions: {
@@ -16,12 +20,15 @@ export const useMetricsStore = defineStore({
       const initialState = await backendService.getMetrics();
       this.items = JSON.parse(JSON.stringify(initialState));
     },
-    async addMetric(metric: Metric) {
-      await backendService.addMetric(metric).then((resolve) => {
+    async addMetric() {
+      if(this.newItem){
+      await backendService.addMetric(this.newItem).then((resolve) => {
         if(resolve){
-          this.items.push(metric);
+          this.items.push(this.newItem as Metric);
         }
       })
+    }
+
     },
     async updateMetric( metric: Metric, index: number) {
       await backendService.updateMetric(metric).then((resolve) => {

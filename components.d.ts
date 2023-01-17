@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     AddMetricDialog: typeof import('./src/components/addMetricDialog.vue')['default']
     Button: typeof import('./src/components/buttons/Button.vue')['default']
     'Button.story': typeof import('./src/components/buttons/Button.story.vue')['default']
+    RemoveMetricDialog: typeof import('./src/components/removeMetricDialog.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TheCounter: typeof import('./src/components/TheCounter.vue')['default']
