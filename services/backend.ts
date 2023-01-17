@@ -1,4 +1,4 @@
-class Metric{
+export class Metric{
 	id: string;
 	code: string;
 	amounts: number[] | null;
@@ -50,6 +50,8 @@ export class BackendService {
         await this.delay(1000);
         if(this.apiKey !== CHALLENGE_API_KEY) { return Promise.reject("API Key is not valid!"); }
         metrics.push(metric);
+        console.log(metrics);
+
         return Promise.resolve(true);
     }
 
