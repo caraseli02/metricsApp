@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { Metric } from '~/types/metric';
-import BackendService from '../../services/backend';
+import {BackendService} from '../../services/backend';
 
 const backendService = new BackendService(import.meta.env.CHALLENGE_API_KEY as string);
 
@@ -16,7 +16,6 @@ export const useMetricsStore = defineStore({
       this.items = await backendService.getMetrics();
     },
     async addMetric(metric: Metric) {
-      await backendService.addMetric(metric);
       this.items.push(metric);
     },
     async updateMetric( metric: Metric) {
