@@ -4,10 +4,6 @@ import routes from 'virtual:generated-pages'
 import App from './App.vue'
 import { createPinia } from 'pinia'
 
-import '@unocss/reset/tailwind.css'
-import './styles/main.css'
-import 'uno.css'
-
 import PrimeVue from 'primevue/config';
 import 'primevue/resources/themes/lara-dark-purple/theme.css'     //theme
 import 'primevue/resources/primevue.min.css'                 //core css

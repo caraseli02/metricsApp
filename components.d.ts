@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AddMetricDialog: typeof import('./src/components/addMetricDialog.vue')['default']
     Button: typeof import('./src/components/buttons/Button.vue')['default']
     'Button.story': typeof import('./src/components/buttons/Button.story.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
