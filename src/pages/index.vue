@@ -30,7 +30,7 @@ const openNew = () => {
   newItem.value = {
     id: generateId(),
     code: '',
-    amounts: null,
+    amounts: [],
     date: new Date(),
   };
   submitted.value = false;
@@ -66,6 +66,11 @@ const confirmDeleteSelected = () => {
       <Column field="amounts" header="Amounts" style="width:20%">
         <template #editor="{ data, field }">
           <InputText v-model="data[field]" />
+        </template>
+        <template #body="{ data, field }">
+          <span v-if="data[field]">
+            {{ data[field].toString() }}
+          </span>
         </template>
       </Column>
       <Column field="date" header="Date" style="width:20%">
