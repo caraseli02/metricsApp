@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import InputText from 'primevue/inputtext';
+import InputNumber from 'primevue/inputnumber';
 import Calendar from 'primevue/calendar';
 import Dialog from 'primevue/dialog';
 import Button from '~/components/buttons/Button.vue';
@@ -17,7 +18,7 @@ const hideDialog = () => {
 const saveProduct = async () => {
   submitted.value = true;
 
-  if (newItem) {
+  if (newItem.value.code.trim()) {
     showMetricDialog.value = false;
     await metricsStore.addMetric()
   }
@@ -28,21 +29,19 @@ const saveProduct = async () => {
     <Dialog v-model:visible="metricsStore.showMetricDialog" :style="{ width: '450px' }" header="Product Details" :modal="true"
       class="p-fluid">
       <div class="field mb-2">
-        <label for="code">Code</label>
+        <label class="mb-2 block" for="code">Code</label>
         <InputText id="code" v-model="newItem.code" required="true" autofocus
           :class="{ 'p-invalid': submitted && !newItem.code }" />
-        <small class="p-error" v-if="submitted && !newItem.code">Code is required.</small>
+        <small class="p-error" v-if="submitted && newItem.code.length === 0">Code is required.</small>
       </div>
-      <div class="field mb-2">
-        <label for="amounts">Amounts</label>
-        <InputText id="amounts" v-model="newItem.amounts" required="true" autofocus
-          :class="{ 'p-invalid': submitted && !newItem.amounts }" />
+      <div class="field mb-2 ">
+        <label class="mb-2 block" for="amounts">Amounts</label>
+        <InputNumber id="amounts" v-model="newItem.amounts" required="true" autofocus />
       </div>
       <div class="field">
-        <label for="date">Date</label>
+        <label class="mb-2 block" for="date">Date</label>
         <Calendar id="date" v-model="newItem.date" required="true" autofocus
           :class="{ 'p-invalid': submitted && !newItem.date }" />
-        <small class="p-error" v-if="submitted && !newItem.date">Date is required.</small>
       </div>
       <template #footer>
         <Button label="Cancel" icon="pi pi-times" class="p-button-text" @click="hideDialog" />
@@ -52,5 +51,10 @@ const saveProduct = async () => {
 </template>
 
 <style scoped>
-
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.block{
+  display: block;
+}
 </style>

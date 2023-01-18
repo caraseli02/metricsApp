@@ -30,7 +30,7 @@ const openNew = () => {
   newItem.value = {
     id: generateId(),
     code: '',
-    amounts: [],
+    amounts: null,
     date: new Date(),
   };
   submitted.value = false;
@@ -49,7 +49,7 @@ const confirmDeleteSelected = () => {
         <Button label="New" icon="pi pi-plus" @click="openNew" />
       </template>
       <template #end>
-        <Button label="Delete" icon="pi pi-trash" class="p-button-danger ml-2" @click="confirmDeleteSelected" />
+        <Button label="Delete" :disabled="!selectedMetric" icon="pi pi-trash" class="p-button-danger ml-2" @click="confirmDeleteSelected" />
       </template>
     </Toolbar>
     <SkeletonLoader v-if="items.length === 0"  />
