@@ -63,3 +63,9 @@ const badgeStyleClass = computed(() => {
     </slot>
   </button>
 </template>
+
+<style scoped>
+.mr-2 {
+  margin-right: 0.5rem;
+}
+</style>

@@ -12,7 +12,7 @@ import { storeToRefs } from 'pinia';
 
 
 const metricsStore = useMetricsStore()
-const {newItem, deleteProductDialog, submitted, showMetricDialog} = storeToRefs(metricsStore)
+const {newItem, deleteProductDialog, submitted, showMetricDialog, loading, items} = storeToRefs(metricsStore)
 onMounted(async () => {
   await metricsStore.fetchMetrics()
 })
@@ -52,7 +52,8 @@ const confirmDeleteSelected = () => {
         <Button label="Delete" icon="pi pi-trash" class="p-button-danger ml-2" @click="confirmDeleteSelected" />
       </template>
     </Toolbar>
-    <DataTable :totalRecords="metricsStore.itemsLength" v-model:selection="selectedMetric" :value="metricsStore.items"
+    <SkeletonLoader v-if="items.length === 0"  />
+    <DataTable v-else :loading="loading" :totalRecords="metricsStore.itemsLength" v-model:selection="selectedMetric" :value="items"
       editMode="row" dataKey="id" v-model:editingRows="editingRows" @row-edit-save="onRowEditSave"
       responsiveLayout="scroll">
       <Column selectionMode="single" headerStyle="width: 3em" />

@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     RemoveMetricDialog: typeof import('./src/components/removeMetricDialog.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SkeletonLoader: typeof import('./src/components/skeletonLoader.vue')['default']
     TheFooter: typeof import('./src/components/TheFooter.vue')['default']
   }
 }
